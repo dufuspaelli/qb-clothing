@@ -434,6 +434,7 @@ Citizen.CreateThread(function()
                     if not creatingCharacter then
                         DrawMarker(2, Config.ClothingRooms[k].coords, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.4, 0.4, 0.2, 255, 255, 255, 255, 0, 0, 0, 1, 0, 0, 0)
                         if dist < 2 then
+                            PlayerData = QBCore.Functions.GetPlayerData()
                             if PlayerData.job.name == Config.ClothingRooms[k].requiredJob then
                                 DrawText3Ds(Config.ClothingRooms[k].coords.x, Config.ClothingRooms[k].coords.y, Config.ClothingRooms[k].coords.z + 0.3, '~g~E~w~ - View Clothing')
                                 if IsControlJustPressed(0, 38) then -- E
@@ -442,9 +443,9 @@ Citizen.CreateThread(function()
                                     if QBCore.Functions.GetPlayerData().charinfo.gender == 1 then gender = "female" end
                                     QBCore.Functions.TriggerCallback('qb-clothing:server:getOutfits', function(result)
                                         openMenu({
-                                            {menu = "roomOutfits", label = "Presets", selected = true, outfits = Config.Outfits[PlayerData.job.name][gender][PlayerData.job.grade.level]},
+                                            --{menu = "roomOutfits", label = "Presets", selected = true, outfits = Config.Outfits[PlayerData.job.name][gender][PlayerData.job.grade.level]},
                                             {menu = "myOutfits", label = "My Outfits", selected = false, outfits = result},
-                                            {menu = "character", label = "Clothing", selected = false},
+                                            {menu = "character", label = "Clothing", selected = true},
                                             {menu = "accessoires", label = "Accessories", selected = false}
                                         })
                                     end)
