@@ -420,7 +420,6 @@ Config.ManPlayerModels = {
     's_m_y_clown_01',
     's_m_y_construct_01',
     's_m_y_construct_02',
-    's_m_y_cop_01',
     's_m_y_dealer_01',
     's_m_y_devinsec_01',
     's_m_y_dockwork_01',
@@ -501,6 +500,28 @@ Config.ManPlayerModels = {
     'tony',
     'g_m_m_chigoon_02_m',
 	'a_m_o_acult_01',
+}
+
+Config.PolicePlayerModels = {
+    ['Woman'] = {
+        's_f_y_cop_01',
+        's_f_y_sheriff_01',
+        's_m_y_swat_01',
+    },
+    ['Man'] = {
+    's_m_y_cop_01',
+    's_m_y_hwaycop_01',
+    's_m_m_snowcop_01',
+    'csb_cop',
+    's_m_m_fibsec_01',
+    'csb_trafficwarden',
+    's_m_m_armoured_01',
+    's_m_m_armoured_02',
+    's_m_y_swat_01',
+    's_m_y_ranger_01',
+    's_m_y_sheriff_01'
+    }
+    
 }
 Config.LoadedManModels = {}
 Config.LoadedWomanModels = {}

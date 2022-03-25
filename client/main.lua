@@ -1610,8 +1610,13 @@ end
 
 RegisterNUICallback('setCurrentPed', function(data, cb)
     local playerData = QBCore.Functions.GetPlayerData()
-
-    if playerData.charinfo.gender == 0 then
+    if playerData.job.name == "police" and playerData.charinfo.gender == 0 then 
+        cb(Config.PolicePlayerModels.Man[data.ped])
+        ChangeToSkinNoUpdate(Config.PolicePlayerModels.Man[data.ped])
+    elseif playerData.job.name == "police" and playerData.charinfo.gender == 1 then
+        cb(Config.PolicePlayerModels.Woman[data.ped])
+        ChangeToSkinNoUpdate(Config.PolicePlayerModels.Woman[data.ped])
+    elseif playerData.charinfo.gender == 0 then
         cb(Config.ManPlayerModels[data.ped])
         ChangeToSkinNoUpdate(Config.ManPlayerModels[data.ped])
     else
@@ -1639,8 +1644,11 @@ AddEventHandler('qb-clothes:client:CreateFirstCharacter', function()
             {menu = "clothing", label = "Features", selected = false},
             {menu = "accessoires", label = "Accessories", selected = false}
         })
-
-        if PlayerData.charinfo.gender == 1 then
+        if PlayerData.job.name == "police" and PlayerData.charinfo.gender == 0 then 
+            skin = 's_m_y_cop_01'
+        elseif PlayerData.job.name == "police" and PlayerData.charinfo.gender == 1 then
+            skin = "s_f_y_cop_01"
+        elseif PlayerData.charinfo.gender == 1 then
             skin = "mp_f_freemode_01"
         end
 
@@ -2114,11 +2122,14 @@ function reloadSkin(health)
     local model = nil
 
     local gender = QBCore.Functions.GetPlayerData().charinfo.gender
+    local job = QBCore.Functions.GetPlayerData().job.name
 
-    if gender == 1 then -- Gender is ONE for FEMALE
-    model = GetHashKey("mp_f_freemode_01") -- Female Model
+    if job == "police" then 
+        model = GetHashKey("s_m_y_cop_01")
+    elseif gender == 1 then -- Gender is ONE for FEMALE
+        model = GetHashKey("mp_f_freemode_01") -- Female Model
     else 
-    model = GetHashKey("mp_m_freemode_01") -- Male Model
+        model = GetHashKey("mp_m_freemode_01") -- Male Model
     end 
 
     RequestModel(model)
