@@ -1775,7 +1775,22 @@ AddEventHandler('qb-clothes:client:CreateFirstCharacter', function()
    
             TriggerEvent('qb-clothing:client:getOutfits', "police", 4)
             if PlayerData.charinfo.gender == 1 then 
-
+                Wait(2000)
+                TriggerEvent('qb-clothing:client:loadOutfit', {
+                    ["outfitData"] = {
+                        ['pants'] = {item = 24, texture = 0}, -- Pants
+                        ['arms'] = {item = 19, texture = 0}, -- Arms
+                        ['t-shirt'] = {item = 58, texture = 0}, -- T Shirt
+                        ['vest'] = {item = 0, texture = 0}, -- Body Vest
+                        ['torso2'] = {item = 55, texture = 0}, -- Jacket
+                        ['shoes'] = {item = 51, texture = 0}, -- Shoes
+                        ['accessory'] = {item = 0, texture = 0}, -- Neck Accessory
+                        ['bag'] = {item = 0, texture = 0}, -- Bag
+                        ['hat'] = {item = -1, texture = -1}, -- Hat
+                        ['glass'] = {item = 0, texture = 0}, -- Glasses
+                        ['mask'] = {item = 0, texture = 0} -- Mask
+                    }
+                })
             else
                 Wait(2000)
                 print("haloo")
