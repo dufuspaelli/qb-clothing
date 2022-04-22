@@ -407,11 +407,25 @@ QBClothing.Open = function(data) {
         hasTracker = false;
     }
 
+    if (data.isCop) {
+        console.log("iscop")
+        $('[data-type="model"]').hide()
+        $('[data-type="t-shirt"]').hide()
+        $('[data-type="torso2"]').hide()
+        $('[data-type="pants"]').hide()
+    } else {
+        $('[data-type="model"]').hide()
+        $('[data-type="t-shirt"]').show()
+        $('[data-type="torso2"]').show()
+        $('[data-type="pants"]').show()
+    }
+
     $(".change-camera-buttons").fadeIn(150);
 
     $(".clothing-menu-roomOutfits-container").css("display", "none");
     $(".clothing-menu-myOutfits-container").css("display", "none");
     $(".clothing-menu-character-container").css("display", "none");
+    $(".clothing-menu-cop-container").css("display", "none");
     $(".clothing-menu-clothing-container").css("display", "none");
     $(".clothing-menu-accessoires-container").css("display", "none");
     $(".clothing-menu-container").css({ "display": "block" }).animate({ right: 0, }, 200);
@@ -503,6 +517,7 @@ QBClothing.Close = function() {
     $(".clothing-menu-roomOutfits-container").css("display", "none");
     $(".clothing-menu-myOutfits-container").css("display", "none");
     $(".clothing-menu-character-container").css("display", "none");
+    $(".clothing-menu-cop-container").css("display", "none");
     $(".clothing-menu-clothing-container").css("display", "none");
     $(".clothing-menu-accessoires-container").css("display", "none");
     $(".clothing-menu-header").html("");
@@ -549,10 +564,9 @@ QBClothing.SetMaxValues = function(maxValues) {
 
             $(itemMax).html("<p>Item: " + maxValues[containers.data('type')].item + "</p>")
             $(headerMax).html("<p>Texture: " + maxValues[containers.data('type')].texture + "</p>")
-        }
+        } 
     })
 }
-
 QBClothing.ResetValues = function() {
     $.each(clothingCategorys, function(i, cat) {
         var itemCats = $(".clothing-menu-container").find('[data-type="' + i + '"]');

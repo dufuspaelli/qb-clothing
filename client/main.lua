@@ -382,10 +382,11 @@ RegisterNetEvent('qb-clothing:client:getOutfits', function(requiredJob, gradeLev
         openMenu({
             {menu = "roomOutfits", label = "Presets", selected = true, outfits = Config.Outfits[requiredJob][gender][gradeLevel]},
             {menu = "myOutfits", label = "My Outfits", selected = false, outfits = result},
+            {menu = "character", label = "Clothing", selected = false},
             --{menu = "character", label = "Clothing", selected = false},
             {menu = "accessoires", label = "Accessories", selected = false},
             {menu = "clothing", label = "Features", selected = false},
-        })
+        }, true)
     end)
 end)
 
@@ -832,17 +833,16 @@ function GetMaxValues()
         end
 
     end
-
     SendNUIMessage({
         action = "updateMax",
         maxValues = maxModelValues
     })
 end
 
-function openMenu(allowedMenus)
+function openMenu(allowedMenus, isCop)
     previousSkinData = json.encode(skinData)
     creatingCharacter = true
-
+    isCop = isCop or false
     local PlayerData = QBCore.Functions.GetPlayerData()
     local trackerMeta = PlayerData.metadata["tracker"]
 
@@ -852,6 +852,7 @@ function openMenu(allowedMenus)
         menus = allowedMenus,
         currentClothing = skinData,
         hasTracker = trackerMeta,
+        isCop = isCop
     })
     SetNuiFocus(true, true)
     SetCursorLocation(0.9, 0.25)
@@ -1778,15 +1779,15 @@ AddEventHandler('qb-clothes:client:CreateFirstCharacter', function()
                 Wait(2000)
                 TriggerEvent('qb-clothing:client:loadOutfit', {
                     ["outfitData"] = {
-                        ['pants'] = {item = 24, texture = 0}, -- Pants
-                        ['arms'] = {item = 19, texture = 0}, -- Arms
-                        ['t-shirt'] = {item = 58, texture = 0}, -- T Shirt
-                        ['vest'] = {item = 0, texture = 0}, -- Body Vest
-                        ['torso2'] = {item = 55, texture = 0}, -- Jacket
-                        ['shoes'] = {item = 51, texture = 0}, -- Shoes
+                        ['pants'] = {item = 133, texture = 0}, -- Pants
+                        ['arms'] = {item = 31, texture = 0}, -- Arms
+                        ['t-shirt'] = {item = 35, texture = 0}, -- T Shirt
+                        ['vest'] = {item = 34, texture = 0}, -- Body Vest
+                        ['torso2'] = {item = 48, texture = 0}, -- Jacket
+                        ['shoes'] = {item = 52, texture = 0}, -- Shoes
                         ['accessory'] = {item = 0, texture = 0}, -- Neck Accessory
                         ['bag'] = {item = 0, texture = 0}, -- Bag
-                        ['hat'] = {item = -1, texture = -1}, -- Hat
+                        ['hat'] = {item = 0, texture = 0}, -- Hat
                         ['glass'] = {item = 0, texture = 0}, -- Glasses
                         ['mask'] = {item = 0, texture = 0} -- Mask
                     }
